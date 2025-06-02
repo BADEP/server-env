@@ -1,7 +1,3 @@
-.. image:: https://odoo-community.org/readme-banner-image
-   :target: https://odoo-community.org/get-involved?utm_source=readme
-   :alt: Odoo Community Association
-
 ======================================
 server configuration environment files
 ======================================
@@ -17,7 +13,7 @@ server configuration environment files
 .. |badge1| image:: https://img.shields.io/badge/maturity-Production%2FStable-green.png
     :target: https://odoo-community.org/page/development-status
     :alt: Production/Stable
-.. |badge2| image:: https://img.shields.io/badge/license-LGPL--3-blue.png
+.. |badge2| image:: https://img.shields.io/badge/licence-LGPL--3-blue.png
     :target: http://www.gnu.org/licenses/lgpl-3.0-standalone.html
     :alt: License: LGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-OCA%2Fserver--env-lightgray.png?logo=github
@@ -100,12 +96,12 @@ You can edit the settings you need in the ``server_environment_files``
 addon. The ``server_environment_files_sample`` can be used as an
 example:
 
-- values common to all / most environments can be stored in the
-  ``default/`` directory using the .ini file syntax;
-- each environment you need to define is stored in its own directory and
-  can override or extend default values;
-- you can override or extend values in the main configuration file of
-  your instance;
+-  values common to all / most environments can be stored in the
+   ``default/`` directory using the .ini file syntax;
+-  each environment you need to define is stored in its own directory
+   and can override or extend default values;
+-  you can override or extend values in the main configuration file of
+   your instance;
 
 Environment variable
 --------------------
@@ -181,7 +177,9 @@ Server environment integration
 ------------------------------
 
 Read the documentation of the class
-`models/server_env_mixin.py <models/server_env_mixin.py>`__.
+`models/server_env_mixin.py <models/server_env_mixin.py>`__ and
+[models/server_env_tech_name_mixin.py]
+(models/server_env_tech_name_mixin.py)
 
 Usage
 =====
@@ -208,20 +206,20 @@ If you want to have a technical name to reference:
 
    class StorageBackend(models.Model):
        _name = "storage.backend"
-       _inherit = ["storage.backend", "server.env.techname.mixin", "server.env.mixin"]
+       _inherit = ["storage.backend", "server.env.techname.mixin"]
 
        [...]
 
 Known issues / Roadmap
 ======================
 
-- it is not possible to set the environment from the command line. A
-  configuration file must be used.
-- the module does not allow to set low level attributes such as database
-  server, etc.
-- server.env.techname.mixin's tech_name field could leverage the new
-  option for computable / writable fields and get rid of some onchange /
-  read / write code.
+-  it is not possible to set the environment from the command line. A
+   configuration file must be used.
+-  the module does not allow to set low level attributes such as
+   database server, etc.
+-  server.env.techname.mixin's tech_name field could leverage the new
+   option for computable / writable fields and get rid of some onchange
+   / read / write code.
 
 Bug Tracker
 ===========
@@ -244,18 +242,18 @@ Authors
 Contributors
 ------------
 
-- Florent Xicluna (Wingo) <florent.xicluna@gmail.com>
-- Nicolas Bessi <nicolas.bessi@camptocamp.com>
-- Alexandre Fayolle <alexandre.fayolle@camptocamp.com>
-- Daniel Reis <dgreis@sapo.pt>
-- Holger Brunn <hbrunn@therp.nl>
-- Leonardo Pistone <leonardo.pistone@camptocamp.com>
-- Adrien Peiffer <adrien.peiffer@acsone.com>
-- Thierry Ducrest <thierry.ducrest@camptocamp.com>
-- Guewen Baconnier <guewen.baconnier@camptocamp.com>
-- Thomas Binfeld <thomas.binsfeld@acsone.eu>
-- Stéphane Bidoul <stefane.bidoul@acsone.com>
-- Simone Orsi <simahawk@gmail.com>
+-  Florent Xicluna (Wingo) <florent.xicluna@gmail.com>
+-  Nicolas Bessi <nicolas.bessi@camptocamp.com>
+-  Alexandre Fayolle <alexandre.fayolle@camptocamp.com>
+-  Daniel Reis <dgreis@sapo.pt>
+-  Holger Brunn <hbrunn@therp.nl>
+-  Leonardo Pistone <leonardo.pistone@camptocamp.com>
+-  Adrien Peiffer <adrien.peiffer@acsone.com>
+-  Thierry Ducrest <thierry.ducrest@camptocamp.com>
+-  Guewen Baconnier <guewen.baconnier@camptocamp.com>
+-  Thomas Binfeld <thomas.binsfeld@acsone.eu>
+-  Stéphane Bidoul <stefane.bidoul@acsone.com>
+-  Simone Orsi <simahawk@gmail.com>
 
 Maintainers
 -----------
