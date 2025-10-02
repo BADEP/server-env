@@ -21,13 +21,13 @@ server configuration environment files
     :target: http://www.gnu.org/licenses/lgpl-3.0-standalone.html
     :alt: License: LGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-OCA%2Fserver--env-lightgray.png?logo=github
-    :target: https://github.com/OCA/server-env/tree/18.0/server_environment
+    :target: https://github.com/OCA/server-env/tree/19.0/server_environment
     :alt: OCA/server-env
 .. |badge4| image:: https://img.shields.io/badge/weblate-Translate%20me-F47D42.png
-    :target: https://translation.odoo-community.org/projects/server-env-18-0/server-env-18-0-server_environment
+    :target: https://translation.odoo-community.org/projects/server-env-19-0/server-env-19-0-server_environment
     :alt: Translate me on Weblate
 .. |badge5| image:: https://img.shields.io/badge/runboat-Try%20me-875A7B.png
-    :target: https://runboat.odoo-community.org/builds?repo=OCA/server-env&target_branch=18.0
+    :target: https://runboat.odoo-community.org/builds?repo=OCA/server-env&target_branch=19.0
     :alt: Try me on Runboat
 
 |badge1| |badge2| |badge3| |badge4| |badge5|
@@ -100,12 +100,12 @@ You can edit the settings you need in the ``server_environment_files``
 addon. The ``server_environment_files_sample`` can be used as an
 example:
 
-- values common to all / most environments can be stored in the
-  ``default/`` directory using the .ini file syntax;
-- each environment you need to define is stored in its own directory and
-  can override or extend default values;
-- you can override or extend values in the main configuration file of
-  your instance;
+-  values common to all / most environments can be stored in the
+   ``default/`` directory using the .ini file syntax;
+-  each environment you need to define is stored in its own directory
+   and can override or extend default values;
+-  you can override or extend values in the main configuration file of
+   your instance;
 
 Environment variable
 --------------------
@@ -217,13 +217,13 @@ If you want to have a technical name to reference:
 Known issues / Roadmap
 ======================
 
-- it is not possible to set the environment from the command line. A
-  configuration file must be used.
-- the module does not allow to set low level attributes such as database
-  server, etc.
-- server.env.techname.mixin's tech_name field could leverage the new
-  option for computable / writable fields and get rid of some onchange /
-  read / write code.
+-  it is not possible to set the environment from the command line. A
+   configuration file must be used.
+-  the module does not allow to set low level attributes such as
+   database server, etc.
+-  server.env.techname.mixin's tech_name field could leverage the new
+   option for computable / writable fields and get rid of some onchange
+   / read / write code.
 
 Bug Tracker
 ===========
@@ -231,7 +231,7 @@ Bug Tracker
 Bugs are tracked on `GitHub Issues <https://github.com/OCA/server-env/issues>`_.
 In case of trouble, please check there if your issue has already been reported.
 If you spotted it first, help us to smash it by providing a detailed and welcomed
-`feedback <https://github.com/OCA/server-env/issues/new?body=module:%20server_environment%0Aversion:%2018.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
+`feedback <https://github.com/OCA/server-env/issues/new?body=module:%20server_environment%0Aversion:%2019.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
 
 Do not contact contributors directly about support or help with technical issues.
 
@@ -246,18 +246,18 @@ Authors
 Contributors
 ------------
 
-- Florent Xicluna (Wingo) <florent.xicluna@gmail.com>
-- Nicolas Bessi <nicolas.bessi@camptocamp.com>
-- Alexandre Fayolle <alexandre.fayolle@camptocamp.com>
-- Daniel Reis <dgreis@sapo.pt>
-- Holger Brunn <hbrunn@therp.nl>
-- Leonardo Pistone <leonardo.pistone@camptocamp.com>
-- Adrien Peiffer <adrien.peiffer@acsone.com>
-- Thierry Ducrest <thierry.ducrest@camptocamp.com>
-- Guewen Baconnier <guewen.baconnier@camptocamp.com>
-- Thomas Binfeld <thomas.binsfeld@acsone.eu>
-- Stéphane Bidoul <stefane.bidoul@acsone.com>
-- Simone Orsi <simahawk@gmail.com>
+-  Florent Xicluna (Wingo) <florent.xicluna@gmail.com>
+-  Nicolas Bessi <nicolas.bessi@camptocamp.com>
+-  Alexandre Fayolle <alexandre.fayolle@camptocamp.com>
+-  Daniel Reis <dgreis@sapo.pt>
+-  Holger Brunn <hbrunn@therp.nl>
+-  Leonardo Pistone <leonardo.pistone@camptocamp.com>
+-  Adrien Peiffer <adrien.peiffer@acsone.com>
+-  Thierry Ducrest <thierry.ducrest@camptocamp.com>
+-  Guewen Baconnier <guewen.baconnier@camptocamp.com>
+-  Thomas Binfeld <thomas.binsfeld@acsone.eu>
+-  Stéphane Bidoul <stefane.bidoul@acsone.com>
+-  Simone Orsi <simahawk@gmail.com>
 
 Maintainers
 -----------
@@ -272,6 +272,6 @@ OCA, or the Odoo Community Association, is a nonprofit organization whose
 mission is to support the collaborative development of Odoo features and
 promote its widespread use.
 
-This module is part of the `OCA/server-env <https://github.com/OCA/server-env/tree/18.0/server_environment>`_ project on GitHub.
+This module is part of the `OCA/server-env <https://github.com/OCA/server-env/tree/19.0/server_environment>`_ project on GitHub.
 
 You are welcome to contribute. To learn how please visit https://odoo-community.org/page/Contribute.

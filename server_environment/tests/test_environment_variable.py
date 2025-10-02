@@ -22,8 +22,8 @@ class TestRunningEnvDefault(ServerEnvironmentCase):
 @patch.dict(odoo_config.options, {"running_env": "testing"})
 class TestEnvironmentVariables(ServerEnvironmentCase):
     def test_env_variables(self):
-        public = "[section]\n" "foo=bar\n" "bar=baz\n"
-        secret = "[section]\n" "bar=foo\n" "alice=bob\n"
+        public = "[section]\nfoo=bar\nbar=baz\n"
+        secret = "[section]\nbar=foo\nalice=bob\n"
         with self.set_config_dir(None), self.set_env_variables(public, secret):
             parser = server_env._load_config()
             self.assertIn("DEFAULT", list(parser.keys()))
@@ -34,7 +34,7 @@ class TestEnvironmentVariables(ServerEnvironmentCase):
             )
 
     def test_env_variables_override(self):
-        public = "[external_service.ftp]\n" "user=foo\n"
+        public = "[external_service.ftp]\nuser=foo\n"
         with self.set_config_dir("testfiles"), self.set_env_variables(public):
             parser = server_env._load_config()
             val = parser.get("external_service.ftp", "user")
