@@ -7,6 +7,7 @@ from functools import partialmethod
 from lxml import etree
 
 from odoo import api, fields, models
+from odoo.orm.model_classes import add_field
 
 from odoo.addons.base_sparse_field.models.fields import Serialized
 
@@ -361,7 +362,6 @@ class ServerEnvMixin(models.AbstractModel):
         field.store = False
         field.required = False
         field.copy = False
-        field.sparse = None
         field.prefetch = False
 
     def _server_env_add_is_editable_field(self, base_field):
@@ -381,7 +381,7 @@ class ServerEnvMixin(models.AbstractModel):
                 # on new records
                 default=True,
             )
-            self._add_field(fieldname, field)
+            add_field(self.env.registry[self._name], fieldname, field)
 
     def _server_env_add_default_field(self, base_field):
         """Add a field storing the default value
@@ -399,7 +399,7 @@ class ServerEnvMixin(models.AbstractModel):
         # (inherits), we want to override it with a new one
         if fieldname not in self._fields or self._fields[fieldname].inherited:
             base_field_cls = base_field.__class__
-            field_args = base_field.args.copy() if base_field.args else {}
+            field_args = dict(base_field._args__) if base_field._args__ else {}
             field_args.pop("_sequence", None)
             fieldlabel = "{} {}".format(base_field.string or "", "Env Default")
             field_args.update(
@@ -414,14 +414,13 @@ class ServerEnvMixin(models.AbstractModel):
             if hasattr(base_field, "selection"):
                 field_args["selection"] = base_field.selection
             field = base_field_cls(**field_args)
-            self._add_field(fieldname, field)
+            add_field(self.env.registry[self._name], fieldname, field)
 
     @api.model
-    def _setup_base(self):
-        super()._setup_base()
-        for fieldname in self._server_env_fields:
-            field = self._fields[fieldname]
+    def _post_model_setup__(self):
+        for field_name in self._server_env_fields:
+            field = self._fields[field_name]
             self._server_env_add_default_field(field)
             self._server_env_transform_field_to_read_from_env(field)
             self._server_env_add_is_editable_field(field)
-        return
+        return super()._post_model_setup__()
