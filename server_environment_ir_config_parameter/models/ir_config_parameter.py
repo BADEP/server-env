@@ -31,7 +31,7 @@ class IrConfigParameter(models.Model):
             cvalue = serv_config.get(SECTION, key)
             if not cvalue:
                 raise UserError(
-                    self.env._("Key %(key)s is empty in server_environment_file", key)
+                    self.env._("Key %s is empty in server_environment_file", key)
                 )
             if cvalue != value:
                 # we write in db on first access;

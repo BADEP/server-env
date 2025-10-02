@@ -34,7 +34,6 @@ class TestEnv(ServerEnvironmentCase):
             {},
             mode="init",
             noupdate=False,
-            kind="test",
         )
 
     def test_get_param(self):
