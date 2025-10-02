@@ -1,7 +1,7 @@
 # Copyright 2016-2018 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 from odoo.exceptions import UserError
 
 from odoo.addons.server_environment.server_env import serv_config
@@ -31,7 +31,7 @@ class IrConfigParameter(models.Model):
             cvalue = serv_config.get(SECTION, key)
             if not cvalue:
                 raise UserError(
-                    _("Key %s is empty in " "server_environment_file") % (key,)
+                    self.env._("Key %(key)s is empty in server_environment_file", key)
                 )
             if cvalue != value:
                 # we write in db on first access;
