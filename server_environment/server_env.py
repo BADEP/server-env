@@ -70,8 +70,7 @@ if _dir:
 
     if not os.path.exists(ck_path):
         raise Exception(
-            "Provided server environment does not exist, "
-            f"please add a folder {ck_path}"
+            f"Provided server environment does not exist, please add a folder {ck_path}"
         )
 
 
@@ -268,7 +267,7 @@ class ServerConfiguration(models.TransientModel):
     @classmethod
     def _build_osv(cls):
         """Build the view for the current configuration."""
-        arch = '<form string="Configuration Form">' '<notebook colspan="4">'
+        arch = '<form string="Configuration Form"><notebook colspan="4">'
 
         # Odoo server configuration
         rcfile = system_base_config.rcfile
