@@ -1,5 +1,5 @@
 from odoo.orm.model_classes import add_to_registry
-from odoo.tests import tagged
+from odoo.tests import Form, tagged
 
 from . import common
 
@@ -78,3 +78,18 @@ class TestEnv(common.ServerEnvironmentCase):
             self.assertEqual(ftp3.host, "sftp3.example.com")
             self.assertEqual(ftp3.user, "monty")
             self.assertEqual(ftp3.password, "computed_password")
+
+            with Form(ftp1) as f:
+                f.description = "New description"
+                with self.assertRaisesRegex(
+                    AssertionError, "can't write on readonly field 'host'"
+                ):
+                    f.host = "newhost"
+                with self.assertRaisesRegex(
+                    AssertionError, "can't write on readonly field 'user'"
+                ):
+                    f.user = "newuser"
+                with self.assertRaisesRegex(
+                    AssertionError, "can't write on readonly field 'password'"
+                ):
+                    f.password = "newpass"
