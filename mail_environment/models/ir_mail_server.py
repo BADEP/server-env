@@ -1,7 +1,7 @@
 # Copyright 2012-2018 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl)
 
-from odoo import api, models
+from odoo import api, fields, models
 
 
 class IrMailServer(models.Model):
@@ -22,6 +22,9 @@ class IrMailServer(models.Model):
         mail_fields.update(base_fields)
         return mail_fields
 
+    smtp_user = fields.Char(search="_search_smtp_user")
+    smtp_host = fields.Char(search="_search_smtp_host")
+
     @api.model
     def _server_env_global_section_name(self):
         """Name of the global section in the configuration files
@@ -29,3 +32,15 @@ class IrMailServer(models.Model):
         Can be customized in your model
         """
         return "outgoing_mail"
+
+    def _search_smtp_user(self, oper, value):
+        servers = self.search_fetch([], ["smtp_user"]).filtered_domain(
+            [("smtp_user", oper, value)]
+        )
+        return fields.Domain([("id", "in", servers.ids)])
+
+    def _search_smtp_host(self, oper, value):
+        servers = self.search_fetch([], ["smtp_host"]).filtered_domain(
+            [("smtp_host", oper, value)]
+        )
+        return fields.Domain([("id", "in", servers.ids)])
