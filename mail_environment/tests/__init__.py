@@ -1,1 +1,2 @@
-from . import test_mail_environment
+from . import test_incoming_mail
+from . import test_outgoing_mail
