@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: server-tools (9.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-09-10 02:53+0000\n"
-"PO-Revision-Date: 2025-05-16 09:24+0000\n"
+"PO-Revision-Date: 2026-07-23 09:46+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: Italian (http://www.transifex.com/oca/OCA-server-tools-9-0/"
 "language/it/)\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.10.4\n"
+"X-Generator: Weblate 5.15.2\n"
 
 #. module: server_environment
 #: model:ir.model.fields,field_description:server_environment.field_server_config__config
@@ -118,7 +118,7 @@ msgstr "odoo | admin_passwd"
 #. module: server_environment
 #: model:ir.model.fields,field_description:server_environment.field_server_config__odoo_I_bin_path
 msgid "odoo | bin_path"
-msgstr ""
+msgstr "odoo | bin_path"
 
 #. module: server_environment
 #: model:ir.model.fields,field_description:server_environment.field_server_config__odoo_I_config
@@ -138,7 +138,7 @@ msgstr "odoo | data_dir"
 #. module: server_environment
 #: model:ir.model.fields,field_description:server_environment.field_server_config__odoo_I_db_app_name
 msgid "odoo | db_app_name"
-msgstr ""
+msgstr "odoo | db_app_name"
 
 #. module: server_environment
 #: model:ir.model.fields,field_description:server_environment.field_server_config__odoo_I_db_host
@@ -203,7 +203,7 @@ msgstr "odoo | dbfilter"
 #. module: server_environment
 #: model:ir.model.fields,field_description:server_environment.field_server_config__odoo_I_default_productivity_apps
 msgid "odoo | default_productivity_apps"
-msgstr ""
+msgstr "odoo | default_productivity_apps"
 
 #. module: server_environment
 #: model:ir.model.fields,field_description:server_environment.field_server_config__odoo_I_dev_mode
@@ -253,12 +253,12 @@ msgstr "odoo | http_port"
 #. module: server_environment
 #: model:ir.model.fields,field_description:server_environment.field_server_config__odoo_I_import_file_maxbytes
 msgid "odoo | import_file_maxbytes"
-msgstr ""
+msgstr "odoo | import_file_maxbytes"
 
 #. module: server_environment
 #: model:ir.model.fields,field_description:server_environment.field_server_config__odoo_I_import_file_timeout
 msgid "odoo | import_file_timeout"
-msgstr ""
+msgstr "odoo | import_file_timeout"
 
 #. module: server_environment
 #: model:ir.model.fields,field_description:server_environment.field_server_config__odoo_I_import_partial
@@ -268,7 +268,7 @@ msgstr "odoo | import_partial"
 #. module: server_environment
 #: model:ir.model.fields,field_description:server_environment.field_server_config__odoo_I_import_url_regex
 msgid "odoo | import_url_regex"
-msgstr ""
+msgstr "odoo | import_url_regex"
 
 #. module: server_environment
 #: model:ir.model.fields,field_description:server_environment.field_server_config__odoo_I_init
@@ -328,12 +328,12 @@ msgstr "odoo | list_db"
 #. module: server_environment
 #: model:ir.model.fields,field_description:server_environment.field_server_config__odoo_I_load_language
 msgid "odoo | load_language"
-msgstr ""
+msgstr "odoo | load_language"
 
 #. module: server_environment
 #: model:ir.model.fields,field_description:server_environment.field_server_config__odoo_I_log_config
 msgid "odoo | log_config"
-msgstr ""
+msgstr "odoo | log_config"
 
 #. module: server_environment
 #: model:ir.model.fields,field_description:server_environment.field_server_config__odoo_I_log_db
@@ -393,7 +393,7 @@ msgstr "odoo | pre_upgrade_scripts"
 #. module: server_environment
 #: model:ir.model.fields,field_description:server_environment.field_server_config__odoo_I_proxy_access_token
 msgid "odoo | proxy_access_token"
-msgstr ""
+msgstr "odoo | proxy_access_token"
 
 #. module: server_environment
 #: model:ir.model.fields,field_description:server_environment.field_server_config__odoo_I_proxy_mode
@@ -408,7 +408,7 @@ msgstr "odoo | publisher_warranty_url"
 #. module: server_environment
 #: model:ir.model.fields,field_description:server_environment.field_server_config__odoo_I_reinit
 msgid "odoo | reinit"
-msgstr ""
+msgstr "odoo | reinit"
 
 #. module: server_environment
 #: model:ir.model.fields,field_description:server_environment.field_server_config__odoo_I_reportgz
@@ -443,7 +443,7 @@ msgstr "odoo | server_wide_modules"
 #. module: server_environment
 #: model:ir.model.fields,field_description:server_environment.field_server_config__odoo_I_skip_auto_install
 msgid "odoo | skip_auto_install"
-msgstr ""
+msgstr "odoo | skip_auto_install"
 
 #. module: server_environment
 #: model:ir.model.fields,field_description:server_environment.field_server_config__odoo_I_smtp_password
@@ -543,7 +543,7 @@ msgstr "odoo | websocket_rate_limit_delay"
 #. module: server_environment
 #: model:ir.model.fields,field_description:server_environment.field_server_config__odoo_I_with_demo
 msgid "odoo | with_demo"
-msgstr ""
+msgstr "odoo | with_demo"
 
 #. module: server_environment
 #: model:ir.model.fields,field_description:server_environment.field_server_config__odoo_I_workers
