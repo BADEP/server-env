@@ -24,35 +24,31 @@ class IrConfigParameter(models.Model):
         for parameter in self:
             parameter.is_environment = serv_config.has_option(SECTION, parameter.key)
 
-    @api.model
-    def get_param(self, key, default=False):
-        value = super().get_param(key, default=None)
+    def _get(self, key, type_="str"):
+        if self.env.context.get("_from_get_param"):
+            # raw database access, used when (re)writing the parameter
+            return super()._get(key, type_)
         if serv_config.has_option(SECTION, key):
             cvalue = serv_config.get(SECTION, key)
             if not cvalue:
                 raise UserError(
                     self.env._("Key %s is empty in server_environment_file", key)
                 )
-            if cvalue != value:
+            if cvalue != super()._get(key, "str")[0]:
                 # we write in db on first access;
                 # should we have preloaded values in database at,
                 # server startup, modules loading their parameters
                 # from data files would break on unique key error.
-                if not self.env.context.get("_from_get_param", 0):
-                    # the check is to avoid recursion, for instance the mail
-                    # addon has an override in ir.config_parameter::write which
-                    # calls get_param if we are setting mail.catchall.alias and
-                    # this will cause an infinite recursion. We cut that
-                    # recursion by using the context check.
-                    #
-                    # The mail addon call to get_param expects to get the value
-                    # *before* the change, so we have to return the database
-                    # value in that case
-                    self.sudo().with_context(_from_get_param=1).set_param(key, cvalue)
-                    value = cvalue
-        if value is None:
-            return default
-        return value
+                self.sudo().set_str(key, cvalue)
+        return super()._get(key, type_)
+
+    def _set(self, key, value, type_):
+        # the check is to avoid recursion: _set() reads the current value
+        # with _get(), which must return the database value (the value
+        # *before* the change) without synchronizing it from the config file
+        return super(IrConfigParameter, self.with_context(_from_get_param=1))._set(
+            key, value, type_
+        )
 
     @api.model_create_multi
     def create(self, vals_list):
