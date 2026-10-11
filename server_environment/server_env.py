@@ -43,6 +43,10 @@ _boolean_states = {
 }
 
 
+class ServerEnvironmentError(Exception):
+    """Raised when the server environment configuration cannot be loaded."""
+
+
 def _load_running_env():
     if not system_base_config.get("running_env"):
         env_running_env = os.environ.get("RUNNING_ENV", os.environ.get("ODOO_STAGE"))
@@ -69,7 +73,7 @@ if _dir:
     ck_path = os.path.join(_dir, system_base_config["running_env"])
 
     if not os.path.exists(ck_path):
-        raise Exception(
+        raise ServerEnvironmentError(
             f"Provided server environment does not exist, please add a folder {ck_path}"
         )
 
@@ -98,12 +102,11 @@ def _escape(s):
 
 def _listconf(env_path):
     """List configuration files in a folder."""
-    files = [
+    return [
         os.path.join(env_path, name)
         for name in sorted(os.listdir(env_path))
         if name.endswith(".conf")
     ]
-    return files
 
 
 def _load_config_from_server_env_files(config_p):
@@ -117,7 +120,9 @@ def _load_config_from_server_env_files(config_p):
     try:
         config_p.read(conf_files)
     except Exception as e:
-        raise Exception(f'Cannot read config files "{conf_files}":  {e}') from e
+        raise ServerEnvironmentError(
+            f'Cannot read config files "{conf_files}":  {e}'
+        ) from e
 
 
 def _load_config_from_rcfile(config_p):
@@ -132,7 +137,7 @@ def _load_config_from_env(config_p):
             try:
                 config_p.read_string(env_config)
             except configparser.Error as err:
-                raise Exception(
+                raise ServerEnvironmentError(
                     f"{varname} content could not be parsed: {err}"
                 ) from err
 
@@ -188,7 +193,7 @@ class ServerConfiguration(models.TransientModel):
 
     @property
     def show_passwords(self):
-        return system_base_config["running_env"] in ("dev",)
+        return system_base_config["running_env"] == "dev"
 
     @classmethod
     def _format_key_display_name(cls, key_name):
@@ -214,8 +219,10 @@ class ServerConfiguration(models.TransientModel):
                 col_name,
                 tmp_field,
             )
-            tmp_field.name = col_name
-            ServerConfiguration._field_definitions.append(tmp_field)
+            # setattr on an existing class does not trigger __set_name__, call it
+            # explicitly so the field gets its name, module and is registered in
+            # the model definitions
+            tmp_field.__set_name__(ServerConfiguration, col_name)
             cls._conf_defaults[col_name] = value
 
     @classmethod
@@ -231,7 +238,7 @@ class ServerConfiguration(models.TransientModel):
     def _get_env_cols(cls, sections=None):
         """Compute base fields"""
         res = {}
-        sections = sections if sections else serv_config.sections()
+        sections = sections or serv_config.sections()
         for section in sections:
             for col, item in serv_config.items(section):
                 key = cls._format_key(section, col)
@@ -296,7 +303,7 @@ class ServerConfiguration(models.TransientModel):
         res = super().get_view(view_id, view_type, **options)
         View = self.env["ir.ui.view"].browse(view_id)
         if view_type == "form":
-            arch, models = View.postprocess_and_fields(
+            arch, _models = View.postprocess_and_fields(
                 self._arch, model=self._name, **options
             )
             res["arch"] = arch

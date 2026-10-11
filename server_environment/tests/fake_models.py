@@ -1,4 +1,6 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+import typing
+
 from odoo import api, models
 
 # pylint: disable=consider-merging-classes-inherited
@@ -6,7 +8,7 @@ from odoo import api, models
 
 class FakePartner(models.Model):
     _name = "res.partner"
-    _inherit = ["res.partner", "server.env.mixin"]
+    _inherit: typing.ClassVar[list[str]] = ["res.partner", "server.env.mixin"]
 
     @property
     def _server_env_fields(self):
