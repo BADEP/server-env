@@ -1,12 +1,14 @@
 # Copyright 2012-2018 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl)
 
+import typing
+
 from odoo import api, fields, models
 
 
 class IrMailServer(models.Model):
     _name = "ir.mail_server"
-    _inherit = ["ir.mail_server", "server.env.mixin"]
+    _inherit: typing.ClassVar[list[str]] = ["ir.mail_server", "server.env.mixin"]
 
     @property
     def _server_env_fields(self):
