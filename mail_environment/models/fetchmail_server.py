@@ -1,8 +1,6 @@
 # Copyright 2012-2018 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl)
 
-import typing
-
 from odoo import api, fields, models
 
 
@@ -10,7 +8,7 @@ class FetchmailServer(models.Model):
     """Incoming POP/IMAP mail server account"""
 
     _name = "fetchmail.server"
-    _inherit: typing.ClassVar[list[str]] = ["fetchmail.server", "server.env.mixin"]
+    _inherit = ["fetchmail.server", "server.env.mixin"]  # noqa: RUF012
 
     @property
     def _server_env_fields(self):
