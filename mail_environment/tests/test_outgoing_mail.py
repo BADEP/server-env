@@ -251,6 +251,6 @@ class TestRestoreOutgoingMailColumns(MailEnvironmentCase):
             # Manually drop in case the column was created.
             model = self.env["ir.mail_server"]
             if sql.column_exists(self.env.cr, model._table, "smtp_authentication"):
-                self.env.cr.execute(  # noqa: S608
+                self.env.cr.execute(
                     f'ALTER TABLE {model._table} DROP COLUMN "smtp_authentication"'
                 )
