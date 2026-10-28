@@ -4,7 +4,6 @@
 import configparser
 import json
 import logging
-import typing
 from functools import partialmethod
 
 from lxml import etree
@@ -129,7 +128,7 @@ class ServerEnvMixin(models.AbstractModel):
 
     server_env_defaults = Serialized()
 
-    _server_env_getter_mapping: typing.ClassVar[dict[str, str]] = {
+    _server_env_getter_mapping = {  # noqa: RUF012
         "integer": "getint",
         "float": "getfloat",
         "monetary": "getfloat",
