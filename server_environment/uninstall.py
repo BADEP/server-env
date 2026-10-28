@@ -73,9 +73,7 @@ def restore_env_managed_columns(env, model_name, field_names, field_defaults=Non
             value = record[field_name]
             # The ORM returns False for NULL on non-boolean fields; map
             # that back to None so psycopg2 writes a proper SQL NULL.
-            if value is False and field.type != "boolean":
-                value = None
-            elif value == "":
+            if value is False and field.type != "boolean" or value == "":
                 value = None
 
             # Try to get a default value if we have None.
