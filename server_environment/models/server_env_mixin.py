@@ -1,6 +1,7 @@
 # Copyright 2018 Camptocamp (https://www.camptocamp.com).
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html)
 
+import configparser
 import json
 import logging
 from functools import partialmethod
@@ -127,7 +128,7 @@ class ServerEnvMixin(models.AbstractModel):
 
     server_env_defaults = Serialized()
 
-    _server_env_getter_mapping = {
+    _server_env_getter_mapping = {  # noqa: RUF012
         "integer": "getint",
         "float": "getfloat",
         "monetary": "getfloat",
@@ -201,9 +202,9 @@ class ServerEnvMixin(models.AbstractModel):
             # special case: we have onchanges relying on tech_name
             # and we are testing them using `tests.common.Form`.
             # when the for is initialized there's no value yet.
-            return
+            return None
         base = self._server_env_global_section_name()
-        return ".".join((base, val))
+        return f"{base}.{val}"
 
     def _server_env_read_from_config(self, field_name, config_getter):
         self.ensure_one()
@@ -218,7 +219,7 @@ class ServerEnvMixin(models.AbstractModel):
                 value = getter(section_name, field_name)
             else:
                 value = getter(global_section_name, field_name)
-        except Exception as e:
+        except (configparser.Error, ValueError) as e:
             _logger.error(
                 "Unable to read field %s in section %s: %s", field_name, section_name, e
             )
@@ -423,6 +424,14 @@ class ServerEnvMixin(models.AbstractModel):
             self._server_env_add_default_field(field)
             self._server_env_transform_field_to_read_from_env(field)
             self._server_env_add_is_editable_field(field)
+        if self._server_env_fields:
+            # fields added above must be part of the update order computed by
+            # the registry setup before _post_model_setup__ is called
+            model_cls = self.env.registry[self._name]
+            model_cls._fields_update_order__ = {
+                field: (field.write_sequence, i)
+                for i, field in enumerate(model_cls._fields.values())
+            }
         return super()._post_model_setup__()
 
     @api.model
