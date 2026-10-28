@@ -8,7 +8,7 @@ class FetchmailServer(models.Model):
     """Incoming POP/IMAP mail server account"""
 
     _name = "fetchmail.server"
-    _inherit = ["fetchmail.server", "server.env.mixin"]
+    _inherit = ["fetchmail.server", "server.env.mixin"]  # noqa: RUF012
 
     @property
     def _server_env_fields(self):

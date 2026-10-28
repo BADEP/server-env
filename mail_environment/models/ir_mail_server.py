@@ -6,7 +6,7 @@ from odoo import api, fields, models
 
 class IrMailServer(models.Model):
     _name = "ir.mail_server"
-    _inherit = ["ir.mail_server", "server.env.mixin"]
+    _inherit = ["ir.mail_server", "server.env.mixin"]  # noqa: RUF012
 
     @property
     def _server_env_fields(self):
